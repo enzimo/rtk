@@ -4,7 +4,9 @@
 
 set -e
 
-REPO="rtk-ai/rtk"
+# Release repository to install from. Defaults to upstream; set RTK_REPO to
+# install a fork's release instead (e.g. RTK_REPO=enzimo/rtk).
+REPO="${RTK_REPO:-rtk-ai/rtk}"
 BINARY_NAME="rtk"
 INSTALL_DIR="${RTK_INSTALL_DIR:-$HOME/.local/bin}"
 
