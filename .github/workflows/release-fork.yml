@@ -10,6 +10,10 @@ name: Fork Release
 #
 # It deliberately does not push to any Homebrew tap, winget manifest, or
 # Discord webhook: those are upstream-owned destinations.
+#
+# Every build job checks out the requested tag, not the dispatched ref, so the
+# published binaries always carry the version being released (they embed the
+# Cargo.toml version via CARGO_PKG_VERSION).
 
 on:
   workflow_dispatch:
@@ -62,6 +66,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -113,6 +119,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -139,6 +147,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
 
       - name: Install dependencies
         run: |
